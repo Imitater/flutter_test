@@ -170,7 +170,7 @@ class MyBody extends StatelessWidget {
         new SliverToBoxAdapter(
           child: Container(
             color: Colors.white,
-            height: 1800,
+            height: 1600,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -349,39 +349,79 @@ class MyBody extends StatelessWidget {
                           fontSize: 22,
                           fontWeight: FontWeight.bold),
                     )),
-                Container(
-                    height: 260,
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(32, 0, 32, 0),
-                      child: ListView.separated(
-                        physics: NeverScrollableScrollPhysics(),
-                        itemBuilder: (BuildContext context, int index) {
-                          return Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Text(list[index].gTitle,
-                                  style: TextStyle(fontSize: 16)),
-                              Text(list[index].gCount,
-                                  style: TextStyle(fontSize: 16))
-                            ],
-                          );
-                        },
-                        separatorBuilder: (BuildContext context, int index) {
-                          return Divider();
-                        },
-                        itemCount: list.length,
-                      ),
-                    )),
               ],
             ),
           ),
         ),
-        new SliverFixedExtentList(
-          itemExtent: 150.0,
-          delegate:
-              new SliverChildBuilderDelegate((context, index) => new ListTile(
-                    title: new Text("List item $index"),
-                  )),
+        SliverList(
+          delegate: SliverChildBuilderDelegate((content, index) {
+            return Expanded(
+                child: Padding(
+              padding: EdgeInsets.fromLTRB(16, 8, 16, 0),
+              child: Column(
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          CircleAvatar(
+                            backgroundImage: NetworkImage(
+                                'https://hbimg.huabanimg.com/b17b2743f2cf02cba0af7e2b65ef1d03ab88f169fe34-QPwZJl_fw658/format/webp'),
+                            radius: 22.0,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(8, 5, 0, 0),
+                                child: Text(
+                                  "何艳",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18),
+                                ),
+                              ),
+                              Padding(
+                                  padding: EdgeInsets.fromLTRB(8, 5, 0, 0),
+                                  child: Text(
+                                    "2分钟前",
+                                    style: TextStyle(color: Colors.grey),
+                                  )),
+                            ],
+                          )
+                        ],
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Image.asset(
+                            "images/heart.png",
+                            width: 20,
+                            height: 20,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: 5),
+                            child: Text(
+                              '10',
+                              style: TextStyle(fontSize: 14),
+                            ),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Text(
+                      '还没看配方，开场白就看了好几遍，今天试着做一下。',
+                      style: TextStyle(color: Colors.black, fontSize: 18),
+                    ),
+                  )
+                ],
+              ),
+            ));
+          }, childCount: 5),
         )
       ],
     );
